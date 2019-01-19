@@ -21,17 +21,18 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;;
 
 @RestController
-@RequestMapping("/cars")
+@RequestMapping("/api")
 public class CarsController {
 	
 	@Autowired
+	
 	private CarsRepository carRepository;
 
 	/**
 	 * Fetch a list of cars
 	 * @return a list of cars
 	 */
-    @RequestMapping(path="/all", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path="/cars/all", method = RequestMethod.GET, produces = "application/json")
     @ApiOperation(value = "Fetch all cars")
     @ApiResponses(value = { 
             @ApiResponse(code = 200, message = "Success", response = Car.class),
@@ -50,7 +51,7 @@ public class CarsController {
      * 
      * @return the {@link car} object
      */
-    @RequestMapping(path = "/{id}", 
+    @RequestMapping(path = "/cars/{id}", 
     				method = RequestMethod.GET)
     @ApiOperation(value = "Fetch a car")
     public Optional<Car> car(@PathVariable Long id) {
@@ -77,7 +78,7 @@ public class CarsController {
      * @param car
      * @return
      */
-    @RequestMapping(path = "/add",
+    @RequestMapping(path = "/cars/add",
     				method = RequestMethod.POST,
     				 consumes =  MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Add a car")
@@ -94,7 +95,7 @@ public class CarsController {
      * @param car
      * @return
      */
-    @RequestMapping(path = "/update",
+    @RequestMapping(path = "/cars/update",
     				method = RequestMethod.PUT)
     @ApiOperation(value = "Update a car")
     public Car update(@RequestBody Car car) {
@@ -111,7 +112,7 @@ public class CarsController {
      * Deletes car identified with <code>id</code>
      * @param id
      */
-    @RequestMapping(path = "/{id}", 
+    @RequestMapping(path = "/cars/{id}", 
 			method = RequestMethod.DELETE)
     @ApiOperation(value = "Delete a car")
     public void delete(@PathVariable Long id) {
